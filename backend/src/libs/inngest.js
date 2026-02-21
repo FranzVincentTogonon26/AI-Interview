@@ -1,6 +1,7 @@
 import { Inngest } from 'inngest';
 import connectDB from './db.js';
 import User from '../models/user.model.js';
+import { deleteStreamUser, upsertStreamUser } from './stream.js';
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: 'video-call-interview' });
@@ -13,12 +14,19 @@ const synUser = inngest.createFunction(
       const { id, email_addresses, first_name, last_name, image_url } = event.data;
       const newUser = {
          clerkId: id,
-         email: email_addresses[0]?.email_address,
+         email: email_addresses?.[0]?.email_address || null,
          name: `${first_name || ''} ${last_name || ''}`,
          profileImage: image_url,
       };
 
-      return await User.create(newUser);
+      await User.create(newUser);
+      await upsertStreamUser(
+         {
+            id: newUser.clerkId.toString(),
+            name: newUser.name,
+            image: newUser.profileImage,
+         }
+      );
    }
 );
 
@@ -27,7 +35,9 @@ const deleteUserFromDB = inngest.createFunction(
    { event: 'clerk/user.deleted' },
    async ({ event }) => {
       const { id } = event.data;
+      await connectDB();
       await User.deleteOne({ clerkId: id });
+      await deleteStreamUser(id.toString());
    }
 );
 
