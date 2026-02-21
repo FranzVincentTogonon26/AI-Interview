@@ -14,7 +14,7 @@ const synUser = inngest.createFunction(
       const { id, email_addresses, first_name, last_name, image_url } = event.data;
       const newUser = {
          clerkId: id,
-         email: email_addresses[0]?.email_address,
+         email: email_addresses?.[0]?.email_address || null,
          name: `${first_name || ''} ${last_name || ''}`,
          profileImage: image_url,
       };
@@ -34,8 +34,8 @@ const deleteUserFromDB = inngest.createFunction(
    { id: 'delete-user-from-db' },
    { event: 'clerk/user.deleted' },
    async ({ event }) => {
-      await connectDB();
       const { id } = event.data;
+      await connectDB();
       await User.deleteOne({ clerkId: id });
       await deleteStreamUser(id.toString());
    }
