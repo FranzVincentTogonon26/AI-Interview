@@ -7,7 +7,8 @@ import { clerkMiddleware } from '@clerk/express'
 import { ENV } from './libs/env.js';
 import connectDB from './libs/db.js'
 import { functions, inngest } from './libs/inngest.js';
-import clerkRoutes from './routes/clerk.routes.js';
+import clerkRoutes from './middleware/clerk.routes.js';
+import chatRoutes from './routes/chatRoutes.js'
 
 const app = express();
 const PORT = ENV.PORT || 8000;
@@ -17,9 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware())
 
-// Inngest Endpoint
+// Webhooks 
 app.use('/api/webhooks', clerkRoutes);
 app.use('/api/inngest', serve({ client: inngest, functions }));
+
+// Routes
+app.use('/api/chat', chatRoutes);
 
 connectDB().then( () => {
     app.listen( PORT, () => {
