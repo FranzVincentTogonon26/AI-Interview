@@ -1,23 +1,26 @@
-import { Inngest } from "inngest";
-import connectDB from "./db";
-import User from "../models/user.model";
+import { Inngest } from 'inngest';
+import connectDB from './db.js';
+import User from '../models/user.model.js';
 
-export const inngest = new Inngest({ id: "AI-Interview" });
+// Create a client to send and receive events
+export const inngest = new Inngest({ id: 'video-call-interview' });
 
 const synUser = inngest.createFunction(
-    { id: 'sync-user' },
-    { event: 'clerk/user.created' },
-    async ({ event }) => {
-        await connectDB();
-        const { id, email_addresses, first_name, last_name, image_url } = event.data;
-        const newUser = {
-            clerkId: id,
-            email: email_addresses[0]?.email_address,
-            name: `${ first_name || '' } ${ last_name || '' }`,
-            profileImage: image_url
-        }
-        return await User.create(newUser);
-    }
+   { id: 'sync-user' },
+   { event: 'clerk/user.created' },
+   async ({ event }) => {
+      console.log(event)
+      await connectDB();
+      const { id, email_addresses, first_name, last_name, image_url } = event.data;
+      const newUser = {
+         clerkId: id,
+         email: email_addresses[0]?.email_address,
+         name: `${first_name || ''} ${last_name || ''}`,
+         profileImage: image_url,
+      };
+
+      return await User.create(newUser);
+   }
 );
 
 const deleteUserFromDB = inngest.createFunction(
@@ -26,9 +29,8 @@ const deleteUserFromDB = inngest.createFunction(
    async ({ event }) => {
       const { id } = event.data;
       await User.deleteOne({ clerkId: id });
-      // await deleteUserFromDB(id.toString());
    }
 );
 
-export const functions = [synUser,deleteUserFromDB];
-   
+// Create an empty array where we'll export future Inngest functions
+export const functions = [synUser, deleteUserFromDB];
