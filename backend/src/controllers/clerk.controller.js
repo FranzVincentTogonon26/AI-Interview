@@ -1,4 +1,5 @@
 import { verifyWebhook } from '@clerk/express/webhooks';
+import  { inngest }  from '../libs/inngest.js'
 
 export const createUserWebhook = async (req, res, next) => {
     try {
@@ -10,6 +11,10 @@ export const createUserWebhook = async (req, res, next) => {
                 statusCode: 400
             })
         }
+        await inngest.send({
+            name: 'clerk/user.created',
+            data: event.data
+        });
         return res.status(200).json({
             success: true,
             message: 'User created..',
