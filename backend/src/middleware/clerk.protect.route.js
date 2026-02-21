@@ -7,20 +7,12 @@ export const protectRoute = [
         try {
             const userId = req.auth().userId;
             if(!userId){
-                return res.status(401).json({
-                    success: false,
-                    message: 'Unauthorized - Invalid Token',
-                    statusCode: 401
-                })
+                return res.status(401).json({message: 'Unauthorized - Invalid Token'})
             } 
 
             const user = await User.findOne({userId});
             if(!user){
-                return res.status(404).json({
-                    success: false,
-                    message: 'User not found..',
-                    statusCode: 404
-                })
+                return res.status(404).json({message: 'User not found..'})
             }
 
             req.user = user;
@@ -29,11 +21,7 @@ export const protectRoute = [
 
         } catch (error) {
             console.error('Error in protected middleware', error.message);
-            res.status(500).json({
-                success: false,
-                message: 'Internal Server Error',
-                statusCode: 500
-            })
+            res.status(500).json({message: 'Internal Server Error'})
         }
     }
 ]

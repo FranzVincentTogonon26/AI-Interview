@@ -9,6 +9,7 @@ import connectDB from './libs/db.js'
 import { functions, inngest } from './libs/inngest.js';
 import clerkRoutes from './middleware/clerk.routes.js';
 import chatRoutes from './routes/chatRoutes.js'
+import sessionRoutes from './routes/sessionRoutes.js'
 
 const app = express();
 const PORT = ENV.PORT || 8000;
@@ -24,6 +25,7 @@ app.use('/api/inngest', serve({ client: inngest, functions }));
 
 // Routes
 app.use('/api/chat', chatRoutes);
+app.use('/api/sessions', sessionRoutes);
 
 connectDB().then( () => {
     app.listen( PORT, () => {
