@@ -10,12 +10,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={ <HomePage /> } />
-      <Route
-        path="/problems"
-        element={
-          !isLoaded ? null : isSignedIn ? <ProblemsPage /> : <Navigate to="/" />
-        }
-      />
+      <Route path="/problems" element={ !isLoaded ? null : isSignedIn ? <ProblemsPage /> : <Navigate to="/" /> } />
     </Routes>
   )
 }
