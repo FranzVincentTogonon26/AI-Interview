@@ -46,11 +46,11 @@ export const createSession = async (req, res) => {
 
 export const getActiveSession = async (_, res) => {
     try {
-        const sessions = await Session.find({status:"active"})
+        const session = await Session.find({status:"active"})
                                       .populate("host","name profileImage email clerkId")
                                       .sort({createdAt:-1})
                                       .limit(20);
-        res.status(200).json({sessions});
+        res.status(200).json({session});
 
     } catch (error) {
         console.error('Error in getActiveSessions controller', error.message);
@@ -61,11 +61,11 @@ export const getActiveSession = async (_, res) => {
 export const getRecentSession = async (req, res) => {
     try {
         const userId = req.user._id;
-        const sessions = await Session.find({
+        const session = await Session.find({
             status:"completed",
             $or: [{host: userId}, {participant: userId}]
         }).sort({createdAt:-1}).limit(20);
-        res.status(200).json({sessions});
+        res.status(200).json({session});
     } catch (error) {
         console.error('Error in getRecentSession controller', error.message);
         res.status(500).json({message: 'Internal Server Error'})
@@ -75,13 +75,13 @@ export const getRecentSession = async (req, res) => {
 export const getSessionById = async (req, res) => {
     try {
         const { id } = req.params;
-        const sessions = await Session.findById(id)
+        const session = await Session.findById(id)
                                       .populate("host", "name email profileImage clerkId")
                                       .populate("participant", "name email profileImage clerkId");
         
-        if(!sessions) return res.status(404).json({message: 'Session not found..'}) 
+        if(!session) return res.status(404).json({message: 'Session not found..'}) 
 
-        res.status(200).json({sessions});
+        res.status(200).json({session});
 
     } catch (error) {
         console.error('Error in getSessionById controller', error.message);
