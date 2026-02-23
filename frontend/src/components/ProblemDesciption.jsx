@@ -21,7 +21,7 @@ function ProblemDesciption({
           <select className="select select-md w-full rounded-lg border" value={currentProblemId} onChange={(e) => onProblemChange(e.target.value)}>
             {
               allProblems.map((prob) => (
-                <option value={prob.id} key={prob.id}>
+                <option value={prob.id} key={prob.id} className='rounded-lg py-2.5'>
                   { prob.title } - { prob.difficulty }
                 </option>
               ))

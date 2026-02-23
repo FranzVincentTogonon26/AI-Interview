@@ -15,15 +15,15 @@ function CodeEditor({
     <div className="h-full bg-base-300 flex flex-col">
       <div className="flex items-center justify-between px-4 py-3 bg-base-100 border-t border-base-300">
         <div className="flex items-center gap-3">
-          <img src={LANGUAGE_CONFIG[selectedLanguage].icon} alt={LANGUAGE_CONFIG[selectedLanguage].icon} className='size-9 rounded-lg ' />
+          <img src={LANGUAGE_CONFIG[selectedLanguage].icon} alt={LANGUAGE_CONFIG[selectedLanguage].icon} className='size-8 rounded-lg ' />
           <select 
-            className="select select-md w-full rounded-lg border"
+            className="select select-sm w-full rounded-lg border"
             value={selectedLanguage}
             onChange={onLanguageChange}
           >
             {
               Object.entries(LANGUAGE_CONFIG).map(([key, lang]) => (
-                <option value={key} key={key}>{lang.name}</option>
+                <option className='rounded-lg py-2.5' value={key} key={key}>{lang.name}</option>
               ))
             }
           </select>

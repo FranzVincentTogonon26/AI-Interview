@@ -1,8 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { data, useNavigate } from 'react-router'
+import { useUser } from '@clerk/clerk-react'
+
+import { useActiveSessions, useCreateSession, useRecentSessions } from '../hooks/useSessions';
+import Navbar from '../components/Navbar';
+import WelcomeSection from '../components/WelcomeSection';
+import StatsCards from '../components/StatsCards';
+import ActiveSessions from '../components/ActiveSessions';
+import RecentSessions from '../components/RecentSessions';
+import CreateSessionModal from '../components/CreateSessionModal';
 
 function Dashboard() {
+
+  const navigate = useNavigate();
+  const { user } = useUser();
+
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [roomConfig, setRoomConfig] = useState({ problem: "", difficulty: "" });
+
+  const createSessionMutation = useCreateSession();
+  const { data:activeSessionData, isLoading:loadingActiveSession } = useActiveSessions();
+  const { data:recentSessionData, isLoading:loadingRecentSession } = useRecentSessions();
+
+  const handleCreateRoom = () => {
+    if(!roomConfig.problem || !roomConfig.difficulty) return;
+
+    createSessionMutation.mutate({
+      problem: roomConfig.problem, 
+      difficulty: roomConfig.difficulty
+    },
+    {
+      onSuccess: (data) => {
+        setShowCreateModal(false);
+        navigate(`/sessions/${data.session._id}`)
+
+      }
+    }
+  )
+
+  }
+ 
+  const activeSessions = activeSessionData?.sessions || [];
+  const recentSessions = recentSessionData?.sessions || [];
+
   return (
-    <div>Dashboard</div>
+    <>
+      <div className="min-h-screen bg-base-300">
+        <Navbar />
+        <WelcomeSection onCreateSession={() => setShowCreateModal(true)} />
+        
+        {/* Grid Layout */}
+        <div className="container mx-auto px-6 pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <StatsCards />
+            <ActiveSessions />
+          </div>
+          
+          <RecentSessions />
+
+        </div>
+
+      </div>
+
+      <CreateSessionModal
+        isOpen={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        roomConfig={roomConfig}
+        setRoomConfig={setRoomConfig}
+        onCreate={handleCreateRoom}
+        isCreating={createSessionMutation.isPending}
+      />
+
+    </>
   )
 }
 
