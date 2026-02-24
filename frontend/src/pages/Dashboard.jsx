@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { data, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { useUser } from '@clerk/clerk-react'
 
 import { useActiveSessions, useCreateSession, useRecentSessions } from '../hooks/useSessions';
@@ -23,40 +23,53 @@ function Dashboard() {
   const { data:recentSessionData, isLoading:loadingRecentSession } = useRecentSessions();
 
   const handleCreateRoom = () => {
+
     if(!roomConfig.problem || !roomConfig.difficulty) return;
 
     createSessionMutation.mutate({
       problem: roomConfig.problem, 
-      difficulty: roomConfig.difficulty
+      difficulty: roomConfig.difficulty.toLowerCase()
     },
     {
       onSuccess: (data) => {
         setShowCreateModal(false);
-        navigate(`/sessions/${data.session._id}`)
-
+        navigate(`/session/${data.session._id}`);
       }
     }
   )
 
   }
  
-  const activeSessions = activeSessionData?.sessions || [];
-  const recentSessions = recentSessionData?.sessions || [];
+  const activeSessions = activeSessionData?.session || [];
+  const recentSessions = recentSessionData?.session || [];
+
+  const isUserInSession = (session) => {
+    if(!user.id) return false;
+    return session.host?.clerkId === user.id || session.participant?.clerkId === user.id;
+  }
 
   return (
     <>
       <div className="min-h-screen bg-base-300">
+        
         <Navbar />
         <WelcomeSection onCreateSession={() => setShowCreateModal(true)} />
         
         {/* Grid Layout */}
         <div className="container mx-auto px-6 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <StatsCards />
-            <ActiveSessions />
+            <StatsCards 
+              activeSessionsCount={activeSessions.length}
+              recentSessionsCount={recentSessions.length}
+            />
+            <ActiveSessions 
+              sessions={activeSessions}
+              isLoading={loadingActiveSession}
+              isUserInSession={isUserInSession}
+            />
           </div>
           
-          <RecentSessions />
+          <RecentSessions sessions={recentSessions} isLoading={loadingRecentSession} />
 
         </div>
 
@@ -67,7 +80,7 @@ function Dashboard() {
         onClose={() => setShowCreateModal(false)}
         roomConfig={roomConfig}
         setRoomConfig={setRoomConfig}
-        onCreate={handleCreateRoom}
+        onCreateRoom={handleCreateRoom}
         isCreating={createSessionMutation.isPending}
       />
 

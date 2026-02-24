@@ -48,6 +48,7 @@ export const getActiveSession = async (_, res) => {
     try {
         const session = await Session.find({status:"active"})
                                       .populate("host","name profileImage email clerkId")
+                                      .populate("participant","name profileImage email clerkId")
                                       .sort({createdAt:-1})
                                       .limit(20);
         res.status(200).json({session});
