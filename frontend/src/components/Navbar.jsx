@@ -19,10 +19,10 @@ function Navbar() {
               <SparklesIcon className='size-6 text-white' />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold tracking-wider">
+              <span className="font-bold tracking-wider ">
                 AI Interview
               </span>
-              <span className="text-xs text-black">Code Together</span>
+              <span className="text-xs text-black font-semibold">Code Together</span>
             </div>
         </Link>
 

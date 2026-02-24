@@ -12,18 +12,18 @@ function HomePage() {
           <Link
             className='flex items-center gap-3 hover:scale-105 transition-transform duration-200'
           >
-            <div className='size-10 rounded-xl bg-linear-to-br from-primary to-accent flex items-center justify-center shadow-lg border border-gray-200'>
+            <div className='size-10 rounded-xl bg-linear-to-br from-primary-content to-accent-content flex items-center justify-center shadow-lg border border-gray-200'>
               <SparkleIcon className='size-6 text-white' />
             </div>
             <div className="flex flex-col">
               <span className="font-bold tracking-wider">
                 AI Interview
               </span>
-              <span className="text-xs text-black">Code Together</span>
+              <span className="text-xs text-black font-semibold">Code Together</span>
             </div>
           </Link>
           <SignInButton mode='modal'>
-            <button className="group px-6 py-3 text-black font-semibold border border-gray-300 rounded-lg text-sm shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 flex  justify-center items-center gap-2">
+            <button className="group px-6 py-3 text-black bg-base-100 font-semibold border border-gray-300 rounded-lg text-sm shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 flex  justify-center items-center gap-2">
               <span>Get Started</span>
               <ArrowRightIcon className='size-4 group-hover:translate-x-0.5 transition-transform' />
             </button>
@@ -36,7 +36,7 @@ function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left  */}
               <div className="space-y-8">
-                <div className="badge badge-success badge-lg py-4">
+                <div className="badge badge-success badge-lg py-4 text-white">
                   <ZapIcon className='size-4' /> Real-time Collaboration
                 </div>
                 <h1 className="text-5xl lg:text-7xl font-black leading-tight tracking-wide">Code Together, <br /> Learn Together</h1>
@@ -50,7 +50,7 @@ function HomePage() {
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <SignInButton mode='modal' >
-                    <button className="btn btn-success btn-lg rounded-lg">Start Coding Now<ArrowRightIcon className='size-5' /></button>
+                    <button className="btn btn-success btn-lg rounded-lg text-white">Start Coding Now<ArrowRightIcon className='size-5' /></button>
                   </SignInButton> 
                   <button className="btn btn-outline btn-lg border border-gray-200 rounded-lg"><VideoIcon className='size-5' />Watch Demo</button>
                 </div>
@@ -84,7 +84,7 @@ function HomePage() {
       {/* Feature Section */}
       <div className="max-w-7xl mx-auto px-4 py-20">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 tracking-wide">Everything You Need to <span className="text-success font-mono">Succeed</span></h2>
+            <h2 className="text-4xl font-bold mb-4 tracking-wide">Everything You Need to <span className="text-success font-black">Succeed</span></h2>
             <p className="text-lg text-base-content/70 max-w-2xl mx-auto">Powerful features designed to make your coding interviews seamless and productive.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 ">

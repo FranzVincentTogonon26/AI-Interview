@@ -29,7 +29,7 @@ function CodeEditor({
           </select>
         </div>
 
-        <button className="btn btn-success btn-sm gap-2 rounded-lg border" disabled={isRunning} onClick={onRunCode}>
+        <button className="btn btn-success btn-sm gap-2 rounded-lg border text-white" disabled={isRunning} onClick={onRunCode}>
           {
             isRunning ? (
             <>

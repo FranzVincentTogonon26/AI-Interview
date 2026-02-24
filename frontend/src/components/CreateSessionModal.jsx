@@ -8,15 +8,13 @@ function CreateSessionModal({
     onClose,
     roomConfig,
     setRoomConfig,
-    onCreate,
+    onCreateRoom,
     isCreating,
 }) {
  
   const problems = Object.values(PROBLEMS);
 
   if(!isOpen) return null;
-
- 
 
   return (
     <div className="modal modal-open">
@@ -32,7 +30,7 @@ function CreateSessionModal({
                         className="select w-full rounded-lg border select-md" 
                         value={roomConfig.problem}
                         onChange={(e) => {
-                            const selectedProblem = problems.find( (prob) => prob.title === e.target.value );
+                            const selectedProblem = problems.find( prob => `${prob.title}(${prob.difficulty})` === e.target.value );
                             setRoomConfig({
                                 difficulty: selectedProblem?.difficulty,
                                 problem: e.target.value
@@ -70,8 +68,8 @@ function CreateSessionModal({
             <div className="modal-action mb-8">
                 <button className="btn btn-primary-content rounded-lg border" onClick={onClose}>Cancel</button>
                 <button 
-                    className="btn btn-success rounded-lg border gap-2"
-                    onClick={onCreate}
+                    className="btn btn-success rounded-lg border gap-2 text-white"
+                    onClick={onCreateRoom}
                     disabled={isCreating || !roomConfig.problem}
                 >
                     {

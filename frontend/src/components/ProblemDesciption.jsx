@@ -12,7 +12,7 @@ function ProblemDesciption({
       <div className="p-6 bg-base-100 border-b border-base-300">
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-3xl font-bold text-gray-800">{problem.title}</h1>
-          <span className={`text-xs badge ${getDifficultyBadgeClass(problem.difficulty)}`}>
+          <span className={`text-xs badge text-white ${getDifficultyBadgeClass(problem.difficulty)}`}>
             {problem.difficulty}
           </span>
         </div>
@@ -79,7 +79,7 @@ function ProblemDesciption({
           <ul className="space-y-2 text-base-content/90">
             {problem.constraints.map((constraint, idx) => (
               <li key={idx} className="flex gap-2 items-center">
-                <div aria-label="success" className="status status-success"></div>
+                <div className="size-1.5 bg-gray-600 rounded-full" />
                 <code className="text-sm">{constraint}</code>
               </li>
             ))}
