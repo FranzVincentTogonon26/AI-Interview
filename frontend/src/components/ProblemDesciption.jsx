@@ -12,7 +12,7 @@ function ProblemDesciption({
       <div className="p-6 bg-base-100 border-b border-base-300">
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-3xl font-bold text-gray-800">{problem.title}</h1>
-          <span className={`text-xs badge text-white ${getDifficultyBadgeClass(problem.difficulty)}`}>
+          <span className={`text-xs badge text-white ${getDifficultyBadgeClass(problem.difficulty.toLowerCase())}`}>
             {problem.difficulty}
           </span>
         </div>
