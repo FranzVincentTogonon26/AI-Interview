@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { ArrowRightIcon, CheckIcon, Code2Icon, SparkleIcon, UsersIcon, VideoIcon, ZapIcon } from 'lucide-react'
+import { ArrowRightIcon, CheckIcon, Code2Icon, HeadsetIcon, UsersIcon, VideoIcon, ZapIcon } from 'lucide-react'
 import { SignInButton } from '@clerk/clerk-react'
 
 function HomePage() {
@@ -13,11 +13,11 @@ function HomePage() {
             className='flex items-center gap-3 hover:scale-105 transition-transform duration-200'
           >
             <div className='size-10 rounded-xl bg-linear-to-br from-primary-content to-accent-content flex items-center justify-center shadow-lg border border-gray-200'>
-              <SparkleIcon className='size-6 text-white' />
+              <HeadsetIcon className='size-6 text-white' />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold tracking-wider">
-                AI Interview
+              <span className="font-bold tracking-tight">
+                Personal Teacher
               </span>
               <span className="text-xs text-black font-semibold">Code Together</span>
             </div>

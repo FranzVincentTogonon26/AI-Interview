@@ -1,5 +1,5 @@
 import React from 'react'
-import { FileQuestion, LayoutDashboardIcon, SparklesIcon } from 'lucide-react'
+import { FileQuestion, HeadsetIcon, LayoutDashboardIcon } from 'lucide-react'
 import { Link, useLocation } from 'react-router'
 import { UserButton } from '@clerk/clerk-react'
 
@@ -16,11 +16,11 @@ function Navbar() {
             className='flex items-center gap-3 hover:scale-105 transition-transform duration-200'
           >
             <div className='size-10 rounded-xl bg-linear-to-br from-primary-content to-accent-content flex items-center justify-center shadow-lg border border-gray-200'>
-              <SparklesIcon className='size-6 text-white' />
+              <HeadsetIcon className='size-6 text-white' />
             </div>
             <div className="flex flex-col">
               <span className="font-bold tracking-wider ">
-                AI Interview
+                Personal Teacher
               </span>
               <span className="text-xs text-black font-semibold">Code Together</span>
             </div>
