@@ -23,8 +23,8 @@ function VideoCallUI({ chatClient, channel }) {
     return (
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
-          <Loader2Icon className="w-12 h-12 mx-auto animate-spin text-primary mb-4" />
-          <p className="text-lg">Joining call...</p>
+          <Loader2Icon className="w-12 h-12 mx-auto animate-spin text-primary-content mb-4" />
+          <p className="text-md">Joining call...</p>
         </div>
       </div>
     );
@@ -36,9 +36,9 @@ function VideoCallUI({ chatClient, channel }) {
         {/* Participants count badge and Chat Toggle */}
         <div className="flex items-center justify-between gap-2 bg-base-100 p-3 rounded-lg shadow">
           <div className="flex items-center gap-2">
-            <UsersIcon className="w-5 h-5 text-primary" />
-            <span className="font-semibold">
-              {participantCount} {participantCount === 1 ? "participant" : "participants"}
+            <UsersIcon className="w-5 h-5 text-primary-content" />
+            <span className="font-semibold text-gray-800">
+              {participantCount} {participantCount === 1 ? "Participant" : "Participants"}
             </span>
           </div>
           {chatClient && channel && (

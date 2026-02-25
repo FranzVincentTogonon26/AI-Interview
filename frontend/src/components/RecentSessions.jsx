@@ -16,13 +16,13 @@ function RecentSessions({ sessions, isLoading }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {isLoading ? (
             <div className="col-span-full flex items-center justify-center py-20">
-              <Loader className="w-10 h-10 animate-spin text-primary" />
+              <Loader className="w-10 h-10 animate-spin text-primary-content" />
             </div>
           ) : sessions.length > 0 ? (
             sessions.map((session) => (
               <div
                 key={session._id}
-                className={`card relative ${
+                className={`card relative rounded-lg ${
                   session.status === "active"
                     ? "bg-success/10 border-success/30 hover:border-success/60"
                     : "bg-base-200 border-base-300 hover:border-primary/30"
@@ -42,18 +42,18 @@ function RecentSessions({ sessions, isLoading }) {
                     <div
                       className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                         session.status === "active"
-                          ? "bg-gradient-to-br from-success to-success/70"
-                          : "bg-gradient-to-br from-primary to-secondary"
+                          ? "bg-success"
+                          : "bg-info-content"
                       }`}
                     >
                       <Code2 className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-base mb-1 truncate">{session.problem}</h3>
+                      <h3 className="font-bold text-base text-gray-800 mb-1 truncate">{session.problem}</h3>
                       <span
-                        className={`badge badge-sm ${getDifficultyBadgeClass(session.difficulty)}`}
+                        className={`badge badge-sm text-white ${getDifficultyBadgeClass(session.difficulty)}`}
                       >
-                        {session.difficulty}
+                        {session?.difficulty.slice(0, 1).toUpperCase() + session?.difficulty.slice(1)}
                       </span>
                     </div>
                   </div>

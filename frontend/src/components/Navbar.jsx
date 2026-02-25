@@ -19,8 +19,8 @@ function Navbar() {
               <HeadsetIcon className='size-6 text-white' />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold tracking-wider ">
-                Personal Teacher
+              <span className="font-bold tracking-thight ">
+                Online Interview Platform
               </span>
               <span className="text-xs text-black font-semibold">Code Together</span>
             </div>

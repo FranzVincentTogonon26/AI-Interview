@@ -6,6 +6,7 @@ import {
   UsersIcon,
   ZapIcon,
   LoaderIcon,
+  Globe,
 } from "lucide-react";
 import { Link } from "react-router";
 import { getDifficultyBadgeClass } from "../lib/utils";
@@ -25,8 +26,9 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="size-2 bg-primary-content rounded-full" />
-            <span className="text-sm font-semibold text-primary-content">{sessions.length} Active</span>
+            {/* <div className="size-2 bg-primary-content rounded-full" /> */}
+            <Globe className="size-5 text-primary-content" />
+            <span className="text-sm font-semibold text-primary-content">{sessions.length} Online</span>
           </div>
         </div>
 
@@ -34,7 +36,7 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
         <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
           {isLoading ? (
             <div className="flex items-center justify-center py-20">
-              <LoaderIcon className="size-10 animate-spin text-primary" />
+              <LoaderIcon className="size-10 animate-spin text-primary-content" />
             </div>
           ) : sessions.length > 0 ? ( 
             sessions.map((session) => (
@@ -93,8 +95,8 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
             ))
           ) : (
             <div className="text-center py-16">
-              <div className="w-17 h-17 mx-auto mb-4 bg-linear-to-br from-primary-content to-secondary-content rounded-2xl flex items-center justify-center">
-                <SparklesIcon className="w-8 h-8 text-white" />
+              <div className="w-17 h-17 mx-auto mb-4 bg-info-content opacity-80 rounded-2xl flex items-center justify-center">
+                <Code2Icon className="w-8 h-8 text-white" />
               </div>
               <p className="text-lg font-semibold mb-1 text-gray-800">No active sessions</p>
               <p className="text-sm opacity-50">Be the first to create one!</p>

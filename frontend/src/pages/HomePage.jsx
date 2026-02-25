@@ -17,7 +17,7 @@ function HomePage() {
             </div>
             <div className="flex flex-col">
               <span className="font-bold tracking-tight">
-                Personal Teacher
+                Online Interview Platform
               </span>
               <span className="text-xs text-black font-semibold">Code Together</span>
             </div>

@@ -8,3 +8,9 @@
         cursor: pointer;
     }
 }
+
+@layer base {
+  .str-video__menu-item {
+    @apply text-white;
+  }
+}
