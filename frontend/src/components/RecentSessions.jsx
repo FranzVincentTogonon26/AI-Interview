@@ -4,13 +4,13 @@ import { formatDistanceToNow } from "date-fns";
 
 function RecentSessions({ sessions, isLoading }) {
   return (
-    <div className="card bg-base-100 border-2 border-accent/20 hover:border-accent/30 mt-8">
+    <div className="card bg-white border border-gray-300 shadow-md rounded-lg mt-8">
       <div className="card-body">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-gradient-to-br from-accent to-secondary rounded-xl">
+          <div className="p-2 bg-gradient-to-br from-accent-content to-secondary-content rounded-lg">
             <Clock className="w-5 h-5 text-white" />
           </div>
-          <h2 className="text-2xl font-black">Your Past Sessions</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Your Past Sessions</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -87,10 +87,10 @@ function RecentSessions({ sessions, isLoading }) {
             ))
           ) : (
             <div className="col-span-full text-center py-16">
-              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-accent/20 to-secondary/20 rounded-3xl flex items-center justify-center">
-                <Trophy className="w-10 h-10 text-accent/50" />
+              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-accent-content/60 to-secondary-content/60 rounded-2xl flex items-center justify-center">
+                <Trophy className="w-10 h-10 text-white" />
               </div>
-              <p className="text-lg font-semibold opacity-70 mb-1">No sessions yet</p>
+              <p className="text-lg font-semibold text-gray-800 mb-1">No sessions yet</p>
               <p className="text-sm opacity-50">Start your coding journey today!</p>
             </div>
           )}

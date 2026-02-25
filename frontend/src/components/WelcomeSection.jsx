@@ -15,7 +15,7 @@ function WelcomeSection({ onCreateSession }) {
                 Welcome back, {user?.firstName || "there"}!
               </h1>
             </div>
-            <p className="text-lg text-base-content/60 ml-16">
+            <p className="text-lg text-base-content/60 ml-2">
               Ready to level up your coding skills?
             </p>
           </div>
