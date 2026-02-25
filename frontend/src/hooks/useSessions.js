@@ -45,15 +45,15 @@ export const useSessionById = (id) => {
         enabled: !!id, // Convert to boolean
         refetchInterval: 5000, // refetch every 5 seconds to detect session status changes
     })
-
+    
     return result;
 
 }
 
-export const useJoinSession = (id) => {
+export const useJoinSession = () => {
     const result = useMutation({
         queryKey: ["joinSession"],
-        mutationFn: () => sessionApi.joinSession(id),
+        mutationFn: sessionApi.joinSession,
         onSuccess: () => {
             toast.success("Join Session successfully");
         },
@@ -66,10 +66,10 @@ export const useJoinSession = (id) => {
 
 }
 
-export const useEndSession = (id) => {
+export const useEndSession = () => {
     const result = useMutation({
         queryKey: ["endSession"],
-        mutationFn: () => sessionApi.endSession(id),
+        mutationFn: sessionApi.endSession,
         onSuccess: () => {
             toast.success("Session Ended successfully");
         },
